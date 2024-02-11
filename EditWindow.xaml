@@ -1,0 +1,71 @@
+﻿<Window x:Class="Storage.EditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Редактирование"        
+        Icon="image/warehouse.png"
+        Height="600" Width="450">
+    <Window.Resources>
+        <Image x:Key="imageSave"
+               Source="image/save.png" Width="39" Height="39"
+               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Foreground" Value="#147587"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Foreground" Value="#147587"/>
+            <Setter Property="BorderBrush" Value="#147587"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#fecb5f"
+          DataContext="{DynamicResource storage}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ToolBar Background="#fa7e5c"
+                 Height="50"
+                 VerticalAlignment="Top">
+            <!--
+              FindAncestor (привязка к контейнеру Window)
+              для закрытия окна после нажатия кнопки "Сохранить"
+            -->
+            <Button Command="{Binding SaveCommand}"
+                CommandParameter="{Binding RelativeSource=
+                {RelativeSource Mode=FindAncestor,
+                AncestorType={x:Type Window}}}">
+                <!--
+                    ContentControl для одновременного нажатия
+                    кнопки и TextBlock
+                -->
+                <StackPanel Orientation="Horizontal">
+                    <ContentControl Content="{StaticResource imageSave}"/>
+                    <TextBlock Margin="4" Style="{StaticResource textBlock}">
+                        Сохранить
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+        </ToolBar>
+        <StackPanel Grid.Row="1" Background="#f3ece5">
+            <StackPanel Grid.Row="1" Margin="50">
+                <TextBlock Text="Название"/>
+                <TextBox Text="{Binding Path=NameProduct}"/>
+                <TextBlock Text="Описание"/>
+                <TextBox Text="{Binding Path=Description }"/>
+                <TextBlock Text="Цена"/>
+                <TextBox Text="{Binding Path=Price}"/>
+                <TextBlock Text="Количество"/>
+                <TextBox Text="{Binding Path=Quantity}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
+
