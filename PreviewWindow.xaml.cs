@@ -15,14 +15,13 @@ using System.Windows.Shapes;
 namespace Storage
 {
     /// <summary>
-    /// Логика взаимодействия для ShowList.xaml
+    /// Логика взаимодействия для PreviewWindow.xaml
     /// </summary>
-    public partial class ShowList : Window
+    public partial class PreviewWindow : Window
     {
-        public ShowList()
+        public PreviewWindow()
         {
             InitializeComponent();
         }
-
     }
 }

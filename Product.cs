@@ -48,7 +48,28 @@ namespace Storage
                 quantity = value;
                 OnPropertyChanget(nameof(Quantity));
             }
-        }       
+        }
+
+        private string currency;
+        public string Currency
+        {
+            get => currency;
+            set
+            {
+                currency = value;
+                OnPropertyChanget(nameof(Currency));
+            }
+        }
+        private string unit;
+        public string Unit
+        {
+            get => unit;
+            set
+            {
+                unit = value;
+                OnPropertyChanget(nameof(Unit));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanget([CallerMemberName] string propertyName = "")

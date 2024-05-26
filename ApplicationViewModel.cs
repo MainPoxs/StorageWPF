@@ -6,11 +6,15 @@ using System.Xml.Serialization;
 using System.Windows;
 using System.Collections.Generic;
 using System.Text.Json;
+using System;
 
- namespace Storage
+namespace Storage
 {
+   
     public class ApplicationViewModel : INotifyPropertyChanged
     {
+        private IFileService fileService;
+        private IDialogService dialogService;
         private Product myProduct;
         public Product MyProduct
         {
@@ -56,7 +60,6 @@ using System.Text.Json;
                 OnPropertyChanget(nameof(Description));
             }
         }
-
         public decimal Price
         {
             get
@@ -92,6 +95,64 @@ using System.Text.Json;
             }
         }
 
+        private string currency;
+        public string Currency
+        {
+            get
+            {
+                if (myProduct == null)
+                    myProduct = new Product();
+                return myProduct.Currency;
+            }
+            set
+            {
+                if (myProduct == null)
+                    myProduct = new Product();
+
+                myProduct.Currency = value;
+                OnPropertyChanget(nameof(Currency));
+            }
+        }
+        private string unit;
+        public string Unit
+        {
+            get
+            {
+                if (myProduct == null)
+                    myProduct = new Product();
+                return myProduct.Unit;
+            }
+            set
+            {
+                if (myProduct == null)
+                    myProduct = new Product();
+
+                myProduct.Unit = value;
+                OnPropertyChanget(nameof(Unit));
+            }
+        }
+
+        private ObservableCollection<string> currencyList;
+        public ObservableCollection<string> CurrencyList
+        {
+            get => currencyList;
+            set
+            {
+                currencyList = value;
+                OnPropertyChanget(nameof(CurrencyList));
+            }
+        }
+        private ObservableCollection<string> unitList;
+        public ObservableCollection<string> UnitList
+        {
+            get => unitList;
+            set
+            {
+                unitList = value;
+                OnPropertyChanget(nameof(UnitList));
+            }
+        }
+
         private ObservableCollection<Product> products;
         public ObservableCollection<Product> Products       
         {
@@ -103,31 +164,26 @@ using System.Text.Json;
             }
         }
 
-        readonly string path = "./ListProduct.xml";
-        public XmlSerializer xmlSerialize;
+        readonly string path = "./ListProduct.xml";   
         
         public ApplicationViewModel()
         {
+            fileService = new XMLFileService();
+            //dialogService = new DefaultDialogService();
             products = new ObservableCollection<Product>();
             myProduct = new Product();
-            xmlSerialize = new XmlSerializer
-                (typeof(ObservableCollection<Product>));
+            currencyList = new ObservableCollection<string> { "руб", "USD" };
+            unitList = new ObservableCollection<string> { "шт", "кг", "л", "упак" };            
 
             if (File.Exists(path))
                 LoadFile();
         }       
-        public void SaveListOfFile()
-        {
-            using (var fs = File.Open(path, FileMode.Create))
-                xmlSerialize.Serialize(fs, Products); //Сериализация
-        }
-        public void LoadFile()
-        {
-            using (var fs = File.Open(path, FileMode.Open))
-                Products = xmlSerialize.Deserialize(fs) as
-                    ObservableCollection<Product>; //Десериализация
-        }
-        
+        public void SaveListOfFile() =>
+            fileService.SaveFile(path, products);
+   
+        public void LoadFile() =>
+            products = fileService.OpenFile(path);       
+
         private RelayCommand createProduct;
         public RelayCommand CreateProduct
         {
@@ -223,6 +279,20 @@ using System.Text.Json;
                    ));
             }
         }
+        private RelayCommand saveAsCommand;
+        public RelayCommand SaveAsCommand
+        {
+            get
+            {
+                return saveAsCommand ??
+                   (saveAsCommand = new RelayCommand(obj =>
+                   {
+                       dialogService = new DefaultDialogService();
+                       dialogService.SaveFileDialog();                    
+                   }
+                   ));
+            }
+        }
         private RelayCommand removeCommand;
         public RelayCommand RemoveCommand
         {
@@ -236,6 +306,20 @@ using System.Text.Json;
                            Products.Remove(product);                      
                    },
                    (obj) => Products.Count > 0));
+            }
+        }
+        private RelayCommand previewCommand;
+        public RelayCommand PreviewCommand
+        {
+            get
+            {
+                return previewCommand ??
+                   (previewCommand = new RelayCommand(obj =>
+                   {
+                       PreviewWindow previewWindow = new PreviewWindow();
+                       previewWindow.Show();
+                   }
+                   ));
             }
         }
 

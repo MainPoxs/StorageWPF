@@ -11,12 +11,16 @@
     <None Remove="image\delete.png" />
     <None Remove="image\edit1.png" />
     <None Remove="image\list1.png" />
+    <None Remove="image\preview.png" />
     <None Remove="image\save.png" />
+    <None Remove="image\saveAs.png" />
     <None Remove="image\warehouse.png" />
     <None Remove="ShowList.xaml~RF43063836.TMP" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspose.PDF" Version="24.4.0" />
+    <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1004" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
   </ItemGroup>
 
@@ -25,7 +29,9 @@
     <Resource Include="image\delete.png" />
     <Resource Include="image\edit1.png" />
     <Resource Include="image\list1.png" />
+    <Resource Include="image\preview.png" />
     <Resource Include="image\save.png" />
+    <Resource Include="image\saveAs.png" />
     <Resource Include="image\warehouse.png" />
   </ItemGroup>
 

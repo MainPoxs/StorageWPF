@@ -12,6 +12,10 @@
                 <Setter Property="FontStretch" Value="Expanded"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
-            </Style>             
+            </Style>
+        <Style x:Key="comboBox" TargetType="ComboBox">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Foreground" Value="#147587"/>
+        </Style>
     </Application.Resources>
 </Application>

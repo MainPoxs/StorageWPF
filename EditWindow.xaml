@@ -23,7 +23,7 @@
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="AcceptsReturn" Value="True"/>
-        </Style>
+        </Style>        
     </Window.Resources>
     <Grid Background="#fecb5f"
           DataContext="{DynamicResource storage}">
@@ -56,14 +56,32 @@
         </ToolBar>
         <StackPanel Grid.Row="1" Background="#f3ece5">
             <StackPanel Grid.Row="1" Margin="50">
-                <TextBlock Text="Название"/>
+                <TextBlock Text="Наименование"/>
                 <TextBox Text="{Binding Path=NameProduct}"/>
                 <TextBlock Text="Описание"/>
                 <TextBox Text="{Binding Path=Description }"/>
-                <TextBlock Text="Цена"/>
-                <TextBox Text="{Binding Path=Price}"/>
-                <TextBlock Text="Количество"/>
-                <TextBox Text="{Binding Path=Quantity}"/>
+                <DockPanel>
+                    <TextBlock Text="Цена" Width="175"/>
+                    <TextBlock Text="Валюта"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBox Width="175"
+                             Text="{Binding Path=Price, StringFormat={}{0:f2}}"/>
+                    <ComboBox Style="{StaticResource comboBox}"
+                              ItemsSource="{Binding CurrencyList}"   
+                              SelectedItem="{Binding Path=Currency}"/>                    
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock Text="Количество" Width="175"/>
+                    <TextBlock Text="Единица"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBox Width="175"
+                             Text="{Binding Path=Quantity}"/>
+                    <ComboBox Style="{StaticResource comboBox}"
+                              ItemsSource="{Binding UnitList}"   
+                              SelectedItem="{Binding Unit}"/>
+                </DockPanel>
             </StackPanel>
         </StackPanel>
     </Grid>

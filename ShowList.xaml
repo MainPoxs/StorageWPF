@@ -6,10 +6,13 @@
         mc:Ignorable="d"
         Title="Список продуктов"        
         Icon="image/warehouse.png"          
-        Height="600" Width="500">    
+        Height="600" Width="800">    
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="25"/>          
+        </Style>
+        <Style TargetType="TableColumn">
+            <Setter Property="Width" Value="*"/>
         </Style>
         <Image x:Key="imageEdit"
                Source="image/edit1.png"
@@ -19,6 +22,11 @@
                Width="39" Height="39"/>
         <Image x:Key="imageSave"
                Source="image/save.png"
+               Width="39" Height="39"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"/>
+        <Image x:Key="imagePreview"
+               Source="image/preview.png"
                Width="39" Height="39"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"/>
@@ -61,6 +69,14 @@
                 </TextBlock>
             </StackPanel>
             </Button>
+            <Button Command="{Binding PreviewCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <ContentControl Content="{StaticResource imagePreview}"/>
+                    <TextBlock Margin="4" Style="{StaticResource textBlock}">
+                        Просмотр
+                    </TextBlock>
+                </StackPanel>
+            </Button>
         </ToolBar>
         <DataGrid Grid.Row="1" AutoGenerateColumns="False"                     
                   IsReadOnly="True"
@@ -71,7 +87,7 @@
                   SelectedItem="{Binding MyProduct}">   
             <!-- Создание таблицы с переносом слов на другую строку-->
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название" 
+                <DataGridTextColumn Header="Наименование" 
                                     Binding="{Binding Path=NameProduct}">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
@@ -91,8 +107,12 @@
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Цена"
                                     Binding="{Binding Path=Price}"/>
+                <DataGridTextColumn Header="Валюта"
+                                    Binding="{Binding Path=Currency}"/>
                 <DataGridTextColumn Header="Количество"
                                     Binding="{Binding Path=Quantity}"/>
+                <DataGridTextColumn Header="Единицы"
+                                    Binding="{Binding Path=Unit}"/>                
             </DataGrid.Columns>
         </DataGrid>        
     </Grid>

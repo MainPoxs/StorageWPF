@@ -22,7 +22,7 @@
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="AcceptsReturn" Value="True"/>      
-        </Style>                 
+        </Style>        
     </Window.Resources>
     <Grid Background="#fecb5f"
           DataContext="{DynamicResource storage}">
@@ -55,18 +55,38 @@
         </ToolBar>
         <StackPanel Grid.Row="1" Background="#f3ece5">
             <StackPanel Grid.Row="1" Margin="50">
-                <TextBlock Text="Название"/>
+                <TextBlock Text="Наименование"/>
                 <TextBox Text="{Binding NameProduct,
                     UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="Описание"/>
                 <TextBox Text="{Binding Description,
                     UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Text="Цена"/>
-                <TextBox Text="{Binding Price, StringFormat={}{0:f2}, 
-                    UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Text="Количество"/>
-                <TextBox Text="{Binding Quantity,
-                    UpdateSourceTrigger=PropertyChanged}"/>
+                <DockPanel>
+                    <TextBlock Text="Цена" Width="175"/>
+                    <TextBlock Text="Валюта"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBox Width="175"
+                             Text="{Binding Price, StringFormat={}{0:f2}, 
+                             UpdateSourceTrigger=PropertyChanged}"/>
+                    <ComboBox Style="{StaticResource comboBox}"
+                              ItemsSource="{Binding CurrencyList}"   
+                              SelectedItem="{Binding Currency, TargetNullValue=null}"                           
+                              SelectedIndex="0"/>
+                </DockPanel>
+                <DockPanel>
+                <TextBlock Text="Количество" Width="175"/>
+                <TextBlock Text="Единица"/>                    
+                </DockPanel>
+                <DockPanel>
+                    <TextBox Width="175"
+                             Text="{Binding Quantity,
+                        UpdateSourceTrigger=PropertyChanged}"/>
+                    <ComboBox Style="{StaticResource comboBox}"
+                              ItemsSource="{Binding UnitList}"   
+                              SelectedItem="{Binding Unit, TargetNullValue=null}"                           
+                              SelectedIndex="0"/>
+                </DockPanel>
             </StackPanel>
         </StackPanel>       
     </Grid>
