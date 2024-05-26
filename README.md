@@ -15,6 +15,7 @@
 
 https://github.com/MainPoxs/StorageWPF/assets/113547018/8f23a3b7-b2fc-4d1a-b3d3-fb7aa9790f64
 
+
 26.05.2024 г. Добавление функциональности.
 
 1. Пользователь имеет возможность выбирать валюту и единицу товара.
@@ -28,3 +29,4 @@ https://github.com/MainPoxs/StorageWPF/assets/113547018/8f23a3b7-b2fc-4d1a-b3d3-
 ![2024-05-26_23-04-18](https://github.com/MainPoxs/StorageWPF/assets/113547018/941ecffe-283b-484e-90c6-50c2792346a9)
 
 
+![2024-05-26_23-31-19](https://github.com/MainPoxs/StorageWPF/assets/113547018/2aceef77-2de7-4f47-9dca-a316146517a9)
