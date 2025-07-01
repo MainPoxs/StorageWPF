@@ -23,7 +23,13 @@
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="AcceptsReturn" Value="True"/>
-        </Style>        
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Foreground" Value="#147587"/>
+            <Setter Property="BorderBrush" Value="#147587"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
     </Window.Resources>
     <Grid Background="#fecb5f"
           DataContext="{DynamicResource storage}">
@@ -55,11 +61,17 @@
             </Button>
         </ToolBar>
         <StackPanel Grid.Row="1" Background="#f3ece5">
-            <StackPanel Grid.Row="1" Margin="50">
+            <StackPanel Grid.Row="1" Margin="50,30">
                 <TextBlock Text="Наименование"/>
                 <TextBox Text="{Binding Path=NameProduct}"/>
                 <TextBlock Text="Описание"/>
                 <TextBox Text="{Binding Path=Description }"/>
+                <TextBlock Text="Дата изготовления"/>
+                <DatePicker SelectedDate="{Binding DateProduction, 
+                    UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="Годен до"/>
+                <DatePicker SelectedDate="{Binding ExpirationDate,
+                    StringFormat={}{0:dd.MM.yyyy}, UpdateSourceTrigger=PropertyChanged}"/>
                 <DockPanel>
                     <TextBlock Text="Цена" Width="175"/>
                     <TextBlock Text="Валюта"/>

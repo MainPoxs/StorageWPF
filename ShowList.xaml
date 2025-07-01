@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="Список продуктов"        
+        Title="Список товаров"        
         Icon="image/warehouse.png"          
-        Height="600" Width="800">    
-    <Window.Resources>
+        Height="600" Width="900">    
+    <Window.Resources>         
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="25"/>          
         </Style>
@@ -76,35 +77,37 @@
                         Просмотр
                     </TextBlock>
                 </StackPanel>
-            </Button>
+            </Button>           
         </ToolBar>
-        <DataGrid Grid.Row="1" AutoGenerateColumns="False"                     
+
+        <!-- DataGrid-создание редактируемой таблицы -->
+        <DataGrid x:Name="grid" Grid.Row="1" AutoGenerateColumns="False"                     
                   IsReadOnly="True"
                   HeadersVisibility="Column"
                   MinColumnWidth="100"
                   Background="#f3ece5"                   
                   ItemsSource="{Binding Products}"
-                  SelectedItem="{Binding MyProduct}">   
+                  SelectedItem="{Binding MyProduct}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction
+                                 Command="{Binding DataContext.ShowDescription,
+                                        RelativeSource={RelativeSource Mode=FindAncestor,
+                                        AncestorType=DataGrid}}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            
             <!-- Создание таблицы с переносом слов на другую строку-->
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Наименование" 
-                                    Binding="{Binding Path=NameProduct}">
+                                    Binding="{Binding Path=NameProduct }">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping"
                                     Value="Wrap"/>                           
                         </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Описание"
-                                    Binding="{Binding Path=Description}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style>
-                            <Setter Property="TextBlock.TextWrapping"
-                                    Value="Wrap"/> 
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                    </DataGridTextColumn.ElementStyle>                   
+                </DataGridTextColumn>                    
                 <DataGridTextColumn Header="Цена"
                                     Binding="{Binding Path=Price}"/>
                 <DataGridTextColumn Header="Валюта"
@@ -112,7 +115,9 @@
                 <DataGridTextColumn Header="Количество"
                                     Binding="{Binding Path=Quantity}"/>
                 <DataGridTextColumn Header="Единицы"
-                                    Binding="{Binding Path=Unit}"/>                
+                                    Binding="{Binding Path=Unit}"/>
+                <DataGridTextColumn Header="Поставщик" 
+                    Binding="{Binding Path=Supplier.Name }"/>
             </DataGrid.Columns>
         </DataGrid>        
     </Grid>

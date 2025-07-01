@@ -19,9 +19,11 @@ namespace Storage
     /// </summary>
     public partial class DescriptionWindow : Window
     {
+        private readonly AppDbContext _context;
         public DescriptionWindow()
         {
-            InitializeComponent();           
+            InitializeComponent();
+            _context = new AppDbContext();
         }
     }
 }
