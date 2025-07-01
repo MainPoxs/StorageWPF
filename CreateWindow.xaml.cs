@@ -7,9 +7,11 @@ namespace Storage
     /// </summary>
     public partial class CreateWindow : Window
     {
+        private readonly AppDbContext _context;
         public CreateWindow()
         {
-            InitializeComponent();           
+            InitializeComponent();
+            _context = new AppDbContext();
         }
     }
 }

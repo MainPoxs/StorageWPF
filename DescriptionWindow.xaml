@@ -4,13 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Описание"        
+        Title="Информация о товаре"        
         Icon="image/warehouse.png"
         Height="500" Width="500">
     <Window.Resources>
         <Style TargetType="TextBlock">
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="FontSize" Value="25"/>            
             <Setter Property="Foreground" Value="#147587"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>          
+            <Setter Property="TextWrapping" Value="Wrap"/>                           
         </Style>        
     </Window.Resources>
     <Grid Background="#fecb5f"
@@ -28,12 +30,29 @@
             <StackPanel Width="450" Grid.Row="1"
                         Margin="20,20"
                         HorizontalAlignment="Left" >
-                <TextBlock TextDecorations="Underline"
-                           FontSize="30"
-                           Text="{Binding Path=NameProduct}"/>                
-                <TextBlock FontStyle="Italic"                    
-                           FontSize="25"
-                           Text="{Binding Path=Description}"/>               
+                <TextBlock FontStyle="Normal" FontSize="30"
+                           TextDecorations="Underline"                           
+                           Text="{Binding Path=NameProduct}"/>
+                <TextBlock Text="{Binding Path=SupplierName}"/>
+                <TextBlock Text="{Binding Path=Description}"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Path=Price}"/>
+                    <TextBlock Margin="10,0,0,0" Text="{Binding Path=Currency}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Path=Quantity}"/>
+                    <TextBlock Margin="10,0,0,0" Text="{Binding Path=Unit}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Дата изготовления:"/>
+                    <TextBlock Margin="10,0,0,0" Text="{Binding Path=DateProduction,
+                        StringFormat={}{0:dd.MM.yyyy}}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Годен до:"/>
+                    <TextBlock Margin="10,0,0,0" Text="{Binding Path=ExpirationDate,
+                        StringFormat={}{0:dd.MM.yyyy}}"/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>       
     </Grid>

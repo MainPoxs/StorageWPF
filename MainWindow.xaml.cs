@@ -20,10 +20,12 @@ namespace Storage
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {        
+    {
+        private readonly AppDbContext _context;
         public MainWindow()
         {    
             InitializeComponent();
+            _context = new AppDbContext();
         }
     }
 }

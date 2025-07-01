@@ -15,19 +15,15 @@ using System.Windows.Shapes;
 namespace Storage
 {
     /// <summary>
-    /// Логика взаимодействия для ShowList.xaml
+    /// Логика взаимодействия для DeleteProduct.xaml
     /// </summary>
-    public partial class ShowList : Window
+    public partial class DeleteProduct : Window
     {
         private readonly AppDbContext _context;
-
-        public ShowList()
+        public DeleteProduct()
         {
             InitializeComponent();
             _context = new AppDbContext();
-           
         }
-        
-
     }
 }

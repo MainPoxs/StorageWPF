@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Title="Создание"        
         Icon="image/warehouse.png"          
-        Height="600" Width="450">
+        Height="600" Width="800">
     <Window.Resources>
         <Image x:Key="imageSave"
                Source="image/save.png" Width="39" Height="39"
@@ -22,7 +22,13 @@
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="AcceptsReturn" Value="True"/>      
-        </Style>        
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Foreground" Value="#147587"/>
+            <Setter Property="BorderBrush" Value="#147587"/>
+            <Setter Property="BorderThickness" Value="2"/>            
+        </Style>
     </Window.Resources>
     <Grid Background="#fecb5f"
           DataContext="{DynamicResource storage}">
@@ -53,14 +59,21 @@
                 </StackPanel>
             </Button>            
         </ToolBar>
-        <StackPanel Grid.Row="1" Background="#f3ece5">
-            <StackPanel Grid.Row="1" Margin="50">
+        <StackPanel Grid.Row="1" Background="#f3ece5" Orientation="Horizontal"  >
+            <StackPanel Grid.Row="1" Width="400" Margin="50,30">
                 <TextBlock Text="Наименование"/>
                 <TextBox Text="{Binding NameProduct,
                     UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="Описание"/>
                 <TextBox Text="{Binding Description,
                     UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="Дата изготовления"/>
+                <DatePicker SelectedDate="{Binding DateProduction,
+                   UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="Годен до"/>
+                <DatePicker SelectedDate="{Binding ExpirationDate,
+                    UpdateSourceTrigger=PropertyChanged}"/>
+                <!-- DockPanel-прижимает содержимое к определенной стороне -->
                 <DockPanel>
                     <TextBlock Text="Цена" Width="175"/>
                     <TextBlock Text="Валюта"/>
@@ -69,9 +82,11 @@
                     <TextBox Width="175"
                              Text="{Binding Price, StringFormat={}{0:f2}, 
                              UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <!-- ComboBox - выпадающий список -->
                     <ComboBox Style="{StaticResource comboBox}"
                               ItemsSource="{Binding CurrencyList}"   
-                              SelectedItem="{Binding Currency, TargetNullValue=null}"                           
+                              SelectedItem="{Binding Currency}"                           
                               SelectedIndex="0"/>
                 </DockPanel>
                 <DockPanel>
@@ -84,9 +99,16 @@
                         UpdateSourceTrigger=PropertyChanged}"/>
                     <ComboBox Style="{StaticResource comboBox}"
                               ItemsSource="{Binding UnitList}"   
-                              SelectedItem="{Binding Unit, TargetNullValue=null}"                           
+                              SelectedItem="{Binding Unit}"                           
                               SelectedIndex="0"/>
                 </DockPanel>
+            </StackPanel>
+            <StackPanel Margin="50,30">
+                <TextBlock Text="Поставщик"/>
+                <ComboBox Style="{StaticResource comboBox}"
+                          ItemsSource="{Binding Suppliers}"
+                          SelectedItem="{Binding Supplier_}"                         
+                              DisplayMemberPath="Name" SelectedIndex="0"/>
             </StackPanel>
         </StackPanel>       
     </Grid>

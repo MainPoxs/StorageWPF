@@ -1,11 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Storage
 {    
     public class Product : INotifyPropertyChanged
-    {       
+    {
+        private int id;
+        public int Id
+        {
+            get => id;
+            set
+            {
+                id = value;
+                OnPropertyChanget(nameof(Id));
+            }
+        }
+
         private string nameProduct;
         public string NameProduct
         {
@@ -28,6 +40,28 @@ namespace Storage
             }
         }
 
+        private DateTime dateProduction;
+        public DateTime DateProduction
+        {
+            get => dateProduction;
+            set
+            {
+                dateProduction = value;
+                OnPropertyChanget(nameof(DateProduction));
+            }
+        }
+
+        private DateTime expirationDate;
+        public DateTime ExpirationDate
+        {
+            get => expirationDate;
+            set
+            {
+                expirationDate = value;
+                OnPropertyChanget(nameof(ExpirationDate));
+            }
+        }
+
         private decimal price;
         public decimal Price
         {
@@ -36,6 +70,17 @@ namespace Storage
             {
                 price = value;
                 OnPropertyChanget(nameof(Price));
+            }
+        }
+
+        private string currency;
+        public string Currency
+        {
+            get => currency;
+            set
+            {
+                currency = value;
+                OnPropertyChanget(nameof(Currency));
             }
         }
 
@@ -50,16 +95,6 @@ namespace Storage
             }
         }
 
-        private string currency;
-        public string Currency
-        {
-            get => currency;
-            set
-            {
-                currency = value;
-                OnPropertyChanget(nameof(Currency));
-            }
-        }
         private string unit;
         public string Unit
         {
@@ -71,10 +106,24 @@ namespace Storage
             }
         }
 
+        private int supplierId;
+        public int SupplierId
+        {
+            get => supplierId;
+            set
+            {
+                supplierId = value;
+                OnPropertyChanget(nameof(SupplierId));
+            }
+        }
+
+        public virtual Supplier Supplier { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanget([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+      
     }
 }

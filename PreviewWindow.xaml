@@ -30,13 +30,17 @@
                     </TextBlock>
                 </StackPanel>
             </Button>
-        </ToolBar>
+        </ToolBar>       
         <FlowDocumentScrollViewer Margin="0,55,0,0"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            
+            <!-- FlowDocument-потоковые документы для просмотра на экране
+            монитора-->
             <FlowDocument Background="#f3ece5"  >
                 <Paragraph FontSize="24" TextAlignment="Center">
                     Список товаров
                 </Paragraph>
+                <!-- BlockUIContainer-для добавления DataGrid -->
                 <BlockUIContainer>
                     <DataGrid Grid.Row="1" AutoGenerateColumns="False"                     
                   IsReadOnly="True"
@@ -65,6 +69,10 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
+                            <DataGridTextColumn Header="Дата изготовления"
+                                    Binding="{Binding Path=DateProduction,
+                                StringFormat={}{0:dd.MM.yyyy}}">                              
+                            </DataGridTextColumn>
                             <DataGridTextColumn Header="Цена"
                                     Binding="{Binding Path=Price}"/>
                             <DataGridTextColumn Header="Валюта"
@@ -74,40 +82,7 @@
                             <DataGridTextColumn Header="Единицы"
                                     Binding="{Binding Path=Unit}"/>
                         </DataGrid.Columns>
-                    </DataGrid>
-
-                    <!--<ListView BorderThickness="0"
-                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                              ItemsSource="{Binding Products}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Width="300" Header="Наименование">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Path=NameProduct}"
-                                                       TextWrapping="Wrap"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Width="300" Header="Описание">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Path=Description}"
-                                                       TextWrapping="Wrap"/>
-                                        </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="Цена" 
-                                    DisplayMemberBinding="{Binding Path=Price}"/>
-                                <GridViewColumn Header="Валюта" 
-                                    DisplayMemberBinding="{Binding Path=Currency}"/>
-                                <GridViewColumn Header="Количество" 
-                                    DisplayMemberBinding="{Binding Path=Quantity}"/>
-                                <GridViewColumn Header="Единицы" 
-                                    DisplayMemberBinding="{Binding Path=Unit}"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>-->
+                    </DataGrid>                   
                 </BlockUIContainer>
             </FlowDocument>
         </FlowDocumentScrollViewer>   

@@ -7,56 +7,78 @@
         mc:Ignorable="d"          
         Title="Склад" Height="450" Width="800"                     
         Icon="image/warehouse.png">
-    <Window.Resources>           
+    <Window.Resources>
         <Image x:Key="imageAdd"
-               Source="image/add.png" Width="33"/>
+               Source="image/add.png" Width="30"/>
         <Image x:Key="imageList"
-               Source="image/list1.png"/>
-    </Window.Resources>    
-    <Grid Background="#fecb5f"
-          DataContext="{DynamicResource storage}">         
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <ToolBar Background="#fa7e5c"
-                 Height="50"
-                 VerticalAlignment="Top">
-            <Button Command="{Binding CreateProduct}">
-                <!--
+               Source="image/list1.png" Width="35"/>
+        <Image x:Key="imageWrite"
+               Source="image/write.png" Width="33"/>
+    </Window.Resources>
+    <Grid DataContext="{DynamicResource storage}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <!--ToolBarTray для вертикальной установки панели-->
+        <ToolBarTray Orientation="Vertical" Background="#fecb5f">
+            <ToolBar Background="#fa7e5c" MinHeight="424"
+                     Margin="10" VerticalAlignment="Top">
+                <Button Command="{Binding CreateProduct}" HorizontalAlignment="Left">
+                    <!--
                     ContentControl для одновременного нажатия
                     кнопки и TextBlock
-                -->
-                <StackPanel Orientation="Horizontal">
-                    <ContentControl Content="{StaticResource imageAdd}"/>
-                    <TextBlock Margin="4"
+                    -->
+                    <StackPanel Orientation="Horizontal" Margin="3">
+                        <ContentControl Content="{StaticResource imageAdd}"/>
+                        <TextBlock Margin="4"
                                Style="{StaticResource textBlock}">
-                        Добавить
-                    </TextBlock>
-                </StackPanel>
-            </Button>
-            <Button Command="{Binding ShowList}">
-                <StackPanel Orientation="Horizontal">
-                    <ContentControl Content="{StaticResource imageList}"/>
-                    <TextBlock Style="{StaticResource textBlock}">
+                            Оприходование товаров
+                        </TextBlock>
+                    </StackPanel>                    
+                </Button>
+                <Button Command="{Binding ShowList}" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <ContentControl Content="{StaticResource imageList}"/>
+                        <TextBlock Margin="2" Style="{StaticResource textBlock}">
                         Список
-                    </TextBlock>
-                </StackPanel>
-            </Button>
-        </ToolBar>  
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding SelectCommand}" HorizontalAlignment="Left">
+                    <!--
+                    ContentControl для одновременного нажатия
+                    кнопки и TextBlock
+                    -->
+                    <StackPanel Orientation="Horizontal" Margin="3">
+                        <ContentControl Content="{StaticResource imageWrite}"/>
+                        <TextBlock Margin="3"
+                               Style="{StaticResource textBlock}">
+                            Списание товаров
+                        </TextBlock>
+                    </StackPanel>
+                </Button>               
+            </ToolBar>
+        </ToolBarTray>
         <!--
           ScrollViewer.HorizontalScrollBarVisibility="Disabled" - 
           убирается горизонтальная прокрутка
         -->
-        <ListBox Background="Silver" Grid.Row="1"
+        <!--
+          TabControl для создания  вкладки
+        -->
+        <TabControl Grid.Column="1">
+            <TabItem Header="Главная страница">
+                <ListBox Background="Silver" Grid.Column="1"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ItemsSource="{Binding Products}"
                  SelectedItem="{Binding MyProduct}"
                  SelectedIndex="{Binding SelectIndex}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <WrapPanel >
-                        <Button BorderBrush="#fa7e5c"
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel >
+                                <Button BorderBrush="#fa7e5c"
                                 Background="#f3ece5"
                                 Foreground="#fa7e5c"
                                 BorderThickness="2"                                 
@@ -64,50 +86,52 @@
                                 Height="100"
                                 FontSize="14" FontWeight="DemiBold"
                                 FontStretch="Expanded">
-                            <TextBlock Text="{Binding Path=NameProduct}"
+                                    <TextBlock Text="{Binding Path=NameProduct}"
                                        TextWrapping="Wrap"
                                        TextAlignment="Center"/>
-                            <!--                                
-                                Привязка к контейнеру ListBox, для осуществления
-                                команды - ShowDescription
-                            -->
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseDoubleClick">                                   
-                                    <i:InvokeCommandAction
+                                    <!--Привязка к контейнеру ListBox, для осуществления
+                                команды - ShowDescription-->
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseDoubleClick">
+                                            <i:InvokeCommandAction
                                         Command="{Binding DataContext.ShowDescription,
                                         RelativeSource={RelativeSource Mode=FindAncestor,
                                         AncestorType=ListBox}}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </Button>                                         
-                    </WrapPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <!--
-                Если элементы не помещаются в строке, то происходит
-                перенос элементов на другую строку
-            -->
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>    
-            <!--               
-                Для перемещения фокуса с одного элемента на другой
-                с последующим его открытием (выделением)
-            -->
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Style.Triggers>
-                        <!-- Фокус находится на выбранном элементе (кнопке)-->
-                        <Trigger Property="IsKeyboardFocusWithin"
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Button>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    
+                    <!--
+                      Если элементы не помещаются в строке, то происходит
+                      перенос элементов на другую строку
+                    -->
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    
+                    <!--               
+                      Для перемещения фокуса с одного элемента на другой
+                      с последующим его открытием (выделением)
+                     -->
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Style.Triggers>
+                                <!-- Фокус находится на выбранном элементе (кнопке)-->
+                                <Trigger Property="IsKeyboardFocusWithin"
                                  Value="True">
-                            <!-- Для выбора (выделения) элемента (кнопки) при нажатии -->
-                            <Setter Property="IsSelected" Value="True"/>                           
-                        </Trigger>                        
-                    </Style.Triggers>
-                </Style>
-            </ListBox.ItemContainerStyle>        
-        </ListBox>    
+                                    <!-- Для выбора (выделения) элемента (кнопки) при нажатии -->
+                                    <Setter Property="IsSelected" Value="True"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </TabItem>
+        </TabControl>        
     </Grid>
 </Window>
