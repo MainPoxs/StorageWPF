@@ -27,4 +27,8 @@ https://github.com/MainPoxs/StorageWPF/assets/113547018/8f23a3b7-b2fc-4d1a-b3d3-
 3. Появилась возможность сохранения на рабочий стол PDF файла.
 ![2024-05-26_23-04-18](https://github.com/MainPoxs/StorageWPF/assets/113547018/941ecffe-283b-484e-90c6-50c2792346a9)
 
+02.07.2025 Добавление DataBase
+Для установки подключения к базе данных в методе OnConfiguring вызывается метод UseNpgsql(), в который передается строка
+подключения.
 
+![2025-07-02_23-02-01](https://github.com/user-attachments/assets/f25ea610-fa02-4358-b5e7-569d4fbddd2a)
