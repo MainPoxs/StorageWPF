@@ -15,3 +15,16 @@
 
 https://github.com/MainPoxs/StorageWPF/assets/113547018/8f23a3b7-b2fc-4d1a-b3d3-fb7aa9790f64
 
+26.05.2024 г. Добавление функциональности.
+
+1. Пользователь имеет возможность выбирать валюту и единицу товара.
+![2024-05-26_23-02-05](https://github.com/MainPoxs/StorageWPF/assets/113547018/351ae3d2-2047-47ab-b43a-0babedec4865)
+![2024-05-26_23-01-38](https://github.com/MainPoxs/StorageWPF/assets/113547018/1d2f5177-cc6b-4236-b9c8-4f5647e09a80)
+
+2. Добавилась вкладка просмотр.
+![2024-05-26_23-03-03](https://github.com/MainPoxs/StorageWPF/assets/113547018/f7263977-4f0a-4804-8367-b445bccb1cb3)
+
+3. Появилась возможность сохранения на рабочий стол PDF файла.
+![2024-05-26_23-04-18](https://github.com/MainPoxs/StorageWPF/assets/113547018/941ecffe-283b-484e-90c6-50c2792346a9)
+
+
