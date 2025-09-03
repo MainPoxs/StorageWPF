@@ -15,3 +15,4 @@
 
 https://github.com/MainPoxs/StorageWPF/assets/113547018/8f23a3b7-b2fc-4d1a-b3d3-fb7aa9790f64
 
+Появилась возможность хранения данных в СУБД PostgreSQL.
